@@ -11,7 +11,11 @@ grails.project.dependency.resolution = {
 
 	log 'warn'
 
-	repositories {        
+	repositories {
+        mavenLocal()
+        mavenRepo "http://aggron:8081/artifactory/repo"
+        mavenCentral()
+
 		grailsPlugins()
 		grailsHome()
 		grailsCentral()
@@ -20,7 +24,9 @@ grails.project.dependency.resolution = {
 	}
 
 	dependencies {
-		runtime('org.springframework.security:org.springframework.security.acls:3.0.4.RELEASE') {
+        compile('org.hsqldb:hsqldb:2.0.0')
+
+		runtime('org.springframework.security:spring-security-acl:3.1.0.RELEASE') {
 			transitive = false
 		}
 	}

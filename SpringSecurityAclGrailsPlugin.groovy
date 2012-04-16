@@ -77,7 +77,7 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl
  */
 class SpringSecurityAclGrailsPlugin {
 
-	String version = '1.1'
+	String version = '1.1.1'
 	String grailsVersion = '1.3 > *'
 	Map dependsOn = [springSecurityCore: '1.0 > *']
 	List pluginExcludes = [
@@ -202,7 +202,7 @@ class SpringSecurityAclGrailsPlugin {
 			parameterNameDiscoverer = ref('parameterNameDiscoverer')
 			permissionEvaluator = ref('permissionEvaluator')
 			roleHierarchy = ref('roleHierarchy')
-			trustResolver = ref('authenticationTrustResolver')
+			//trustResolver = ref('authenticationTrustResolver')
 		}
 	}
 

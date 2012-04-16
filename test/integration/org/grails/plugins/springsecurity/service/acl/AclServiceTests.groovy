@@ -33,6 +33,7 @@ import org.springframework.security.acls.model.Sid
 import org.springframework.security.authentication.TestingAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.GrantedAuthorityImpl
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 
 import test.TestReport as Report
@@ -42,22 +43,24 @@ import test.TestReport as Report
  */
 class AclServiceTests extends GroovyTestCase {
 
-	private final Authentication auth = new TestingAuthenticationToken(
-			'ben', 'ignored', new GrantedAuthorityImpl('ROLE_ADMIN'))
+    def simpleGrantedAuthorityList = [new SimpleGrantedAuthority('ROLE_ADMIN')]
+	private Authentication auth = new TestingAuthenticationToken(
+			'ben', 'ignored', simpleGrantedAuthorityList)
 
-	private final ObjectIdentity topParentOid = new ObjectIdentityImpl(Report, 100L)
-	private final ObjectIdentity middleParentOid = new ObjectIdentityImpl(Report, 101L)
-	private final ObjectIdentity childOid = new ObjectIdentityImpl(Report, 102L)
+	private ObjectIdentity topParentOid = new ObjectIdentityImpl(Report, 100L)
+	private ObjectIdentity middleParentOid = new ObjectIdentityImpl(Report, 101L)
+	private ObjectIdentity childOid = new ObjectIdentityImpl(Report, 102L)
 
-	private final List<Permission> read = [BasePermission.READ]
-	private final List<Permission> write = [BasePermission.WRITE]
-	private final List<Permission> delete = [BasePermission.DELETE]
-	private final List<Permission> administration = [BasePermission.ADMINISTRATION]
-	private final List<Permission> create = [BasePermission.CREATE]
+	private List<Permission> read = [BasePermission.READ]
+	private List<Permission> write = [BasePermission.WRITE]
+	private List<Permission> delete = [BasePermission.DELETE]
+	private List<Permission> administration = [BasePermission.ADMINISTRATION]
+	private List<Permission> create = [BasePermission.CREATE]
 
 	private PrincipalSid principalSid
 
-   def aclCache
+
+    def aclCache
   	def aclService
 	def ehcacheAclCache
 	def sessionFactory
